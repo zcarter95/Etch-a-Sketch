@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
 .container {
@@ -15,8 +16,8 @@ body {
 
 .item {
     flex-shrink: 0;
-    min-width: 125px;
-    min-height: 125px;
+    /* width: 125px;
+    height: 125px; */
     background-color: white;
 }
 
@@ -24,3 +25,7 @@ body {
     background-color: black;
 }
 
+button {
+    margin-bottom: 64px;
+    font-size: 24px;
+}
