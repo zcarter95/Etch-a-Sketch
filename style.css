@@ -8,6 +8,19 @@ body {
 .container {
     display: flex;
     border: black solid;
+    flex-wrap: wrap;
     width: 500px;
     height: 500px;
 }
+
+.item {
+    flex-shrink: 0;
+    min-width: 125px;
+    min-height: 125px;
+    background-color: white;
+}
+
+.hover {
+    background-color: black;
+}
+
