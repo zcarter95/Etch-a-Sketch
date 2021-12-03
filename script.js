@@ -1,6 +1,8 @@
 var container = document.querySelector('div');
 const body = document.querySelector('body');
 const button = document.querySelector('button');
+let colorMode = 'black';
+let rainbowMode = false;
 
 function createDiv(){
     var div = document.createElement('div');
@@ -11,7 +13,7 @@ var divs = []
 
 var range = document.querySelector('input');
 var output = document.getElementById("output");
-output.textContent = range.value;
+output.textContent =   `${range.value} X ${range.value}`;
 var screenSize = range.value;
 screenSize = screenSize * screenSize;
 
@@ -38,7 +40,17 @@ function drawPixels (screenSize){
         item.style.width = determinePixelSize(screenSize);
         item.style.height = determinePixelSize(screenSize);
         item.addEventListener('mouseenter', () => {
-            item.classList.add('hover');
+            const randomColor = Math.floor(Math.random()*16777215).toString(16);
+            switch(rainbowMode) {
+                case true:
+                    item.style.backgroundColor = "#" + randomColor
+                    break;
+                case false:
+                    item.classList.add('hover');
+                    break;
+            }
+            
+            
         })
     })
     return items;
@@ -58,7 +70,7 @@ function removeChildren (items) {
 
 drawPixels(screenSize);
 range.oninput = function() {
-    output.textContent = this.value;
+    output.textContent = `${this.value} X ${this.value}`;
     removeChildren();
     screenSize = this.value;
     screenSize = screenSize * screenSize;
@@ -66,7 +78,30 @@ range.oninput = function() {
 }
 
 button.addEventListener('click', () => {
-    reloadContainer(screenSize);
+    if (rainbowMode === true){
+        rainbowMode = false;
+    }
+    else if (rainbowMode === false){
+        rainbowMode = true;
+    }
+    
+})
+
+button.addEventListener('mouseenter', () => {
+    
+    button.style.backgroundColor = "#" + (Math.floor(Math.random()*16777215).toString(16));
+    button.style.color = "#" + (Math.floor(Math.random()*16777215).toString(16));
+})
+
+button.addEventListener('mouseleave', () => {
+    if (!rainbowMode){
+        button.style.backgroundColor = 'white';
+        button.style.color = 'black';
+    }
+    else{
+        return;
+    }
+    
 })
 
 
