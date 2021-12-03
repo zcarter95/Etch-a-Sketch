@@ -1,5 +1,7 @@
 var container = document.querySelector('div');
+const body = document.querySelector('body');
 const button = document.querySelector('button');
+
 function createDiv(){
     var div = document.createElement('div');
     div.classList.add('item');
@@ -31,6 +33,7 @@ function drawPixels (screenSize){
     
     items = document.querySelectorAll('.item');
     
+
     items.forEach((item) => {
         item.style.width = determinePixelSize(screenSize);
         item.style.height = determinePixelSize(screenSize);
@@ -38,28 +41,33 @@ function drawPixels (screenSize){
             item.classList.add('hover');
         })
     })
-    
-    button.addEventListener('click', () => {
-        items.forEach((item) => {
-            item.classList.remove('hover');
-        })
-    })
+    return items;
 }
 
-function removeChildren () {
-    const divs = document.getElementsByClassName('item');
-    while(divs.length > 0){
+function removeChildren (items) {
+    container.innerHTML = '';
+    for (let i = 0; i < divs.length; i++){
+        divs[i].classList.remove('item');
+        divs[i].classList.remove('hover');
+        divs[i].style.width = '0px';
+        divs[i].style.height = '0px';
         console.log(divs[0]);
-        divs[0].parentNode.removeChild(divs[0]);
     }
 }
+
 
 drawPixels(screenSize);
 range.oninput = function() {
     output.textContent = this.value;
     removeChildren();
+    screenSize = this.value;
+    screenSize = screenSize * screenSize;
     drawPixels(screenSize);
 }
+
+button.addEventListener('click', () => {
+    reloadContainer(screenSize);
+})
 
 
 
